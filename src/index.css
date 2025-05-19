@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+html {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(180deg, #040918 0%, #091540 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  background-position: center;
+  color: hsl(200, 60%, 99%);
+}
+
+.container {
+  margin: 5rem 15rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(225, 23%, 24%);
+  padding: 1rem 2.5rem;
+  border-radius: 1.5rem;
+  align-items: center;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.theme-toggle img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Animations */
+@keyframes scalePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.logo-animate {
+  animation: scalePulse 1.5s ease-in-out;
+}
+
+.toggle-animate {
+  animation: rotate 0.5s ease-in-out;
+}
+
+.title-animate {
+  animation: fadeSlideIn 0.7s ease-out;
+}
+
+.button-animate {
+  animation: slideIn 0.5s ease-out;
+}
+
+.card-animate {
+  animation: fadeSlideIn 0.5s ease-out;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-animate,
+  .toggle-animate,
+  .title-animate,
+  .button-animate,
+  .card-animate {
+    animation: none;
+  }
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.hero-btn {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero-btn button {
+  background-color: hsl(226, 25%, 17%);
+  border: 0.2rem solid hsl(240, 2%, 19%);
+  color: hsl(0, 0%, 93%);
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1.6rem;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.hero-btn button.active {
+  background-color: hsl(3, 71%, 56%);
+  border-color: hsl(3, 77%, 44%);
+  color: hsl(0, 0%, 93%);
+  transform: scale(1.05);
+}
+
+.hero-btn button:hover {
+  background-color: hsl(226, 11%, 37%);
+}
+
+.grid-col-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 2rem;
+  column-gap: 2rem;
+}
+
+.grid-card {
+  background-color: hsl(226, 25%, 17%);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 0.25rem solid hsl(240, 2%, 19%);
+  align-items: center;
+}
+
+.grid-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.grid-card-header__cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.5;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.grid-card-header__cont h4 {
+  display: inline-block;
+  margin-bottom: 0.11rem;
+}
+
+.grid-card-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-card-button button {
+  background: none;
+  border: 0.25rem solid hsl(240, 2%, 19%);
+  border-radius: 2rem;
+  padding: 0.4rem;
+  color: hsl(0, 0%, 93%);
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: hsl(226, 11%, 37%);
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: hsl(0, 0%, 93%);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: hsl(3, 71%, 56%);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Light Theme */
+body.light-theme {
+  background-image: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  color: hsl(227, 75%, 14%);
+}
+
+body.light-theme .header {
+  background-color: hsl(0, 0%, 93%);
+}
+
+body.light-theme .grid-card {
+  background-color: hsl(217, 61%, 90%);
+  border: 0.25rem solid hsl(0, 0%, 78%);
+}
+
+body.light-theme .grid-card-button button {
+  border: 0.25rem solid hsl(0, 0%, 78%);
+  color: hsl(227, 75%, 14%);
+}
+
+body.light-theme .hero-btn button {
+  background-color: hsl(217, 61%, 90%);
+  border: 0.2rem solid hsl(0, 0%, 78%);
+  color: hsl(227, 75%, 14%);
+}
+
+body.light-theme .hero-btn button.active {
+  background-color: hsl(3, 86%, 64%);
+  border-color: hsl(3, 71%, 56%);
+  color: hsl(0, 0%, 93%);
+  transform: scale(1.05);
+}
+
+body.light-theme .hero-btn button:hover {
+  background-color: hsl(0, 0%, 78%);
+}
+
+body.light-theme .slider {
+  background-color: hsl(0, 0%, 78%);
+}
+
+body.light-theme input:checked + .slider {
+  background-color: hsl(3, 86%, 64%);
+}
+
+body.light-theme .slider:before {
+  background-color: hsl(227, 75%, 14%);
+}
+
+/* Hover Effects */
+.theme-toggle:hover {
+  opacity: 0.8;
+}
+
+.grid-card-button button:hover {
+  background-color: hsl(3, 77%, 44%);
+  color: hsl(0, 0%, 93%);
+}
+
+body.light-theme .grid-card-button button:hover {
+  background-color: hsl(3, 71%, 56%);
+  color: hsl(0, 0%, 93%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 2rem;
+  }
+  .grid-col-3 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
