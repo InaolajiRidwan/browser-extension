@@ -14,12 +14,14 @@ import logoPallet from "./assets/images/logo-palette-picker.svg";
 import logoLink from "./assets/images/logo-link-checker.svg";
 import logoDom from "./assets/images/logo-dom-snapshot.svg";
 import logoConsole from "./assets/images/logo-console-plus.svg";
+import { Main } from "./Main";
 
-const data = [
+export const data = [
   {
     logo: logoDevLens,
     name: "DevLens",
-    description: "Quickly inspect page layouts and visualize element boundaries.",
+    description:
+      "Quickly inspect page layouts and visualize element boundaries.",
     isActive: true,
   },
   {
@@ -37,7 +39,8 @@ const data = [
   {
     logo: jsonWizard,
     name: "JSONWizard",
-    description: "Formats, validates, and prettifies JSON responses in-browser.",
+    description:
+      "Formats, validates, and prettifies JSON responses in-browser.",
     isActive: true,
   },
   {
@@ -49,19 +52,22 @@ const data = [
   {
     logo: viewPortBubby,
     name: "ViewportBuddy",
-    description: "Simulates various screen resolutions directly within the browser.",
+    description:
+      "Simulates various screen resolutions directly within the browser.",
     isActive: false,
   },
   {
     logo: logoMakeUp,
     name: "Markup Notes",
-    description: "Enables annotation and notes directly onto webpages for collaborative debugging.",
+    description:
+      "Enables annotation and notes directly onto webpages for collaborative debugging.",
     isActive: true,
   },
   {
     logo: logoGrid,
     name: "GridGuides",
-    description: "Overlay customizable grids and alignment guides on any webpage.",
+    description:
+      "Overlay customizable grids and alignment guides on any webpage.",
     isActive: false,
   },
   {
@@ -85,7 +91,8 @@ const data = [
   {
     logo: logoConsole,
     name: "ConsolePlus",
-    description: "Enhanced developer console with advanced filtering and logging.",
+    description:
+      "Enhanced developer console with advanced filtering and logging.",
     isActive: true,
   },
 ];
@@ -114,11 +121,17 @@ function Header() {
 
   return (
     <div className="header">
-      <img className="img logo-animate" src={logo} alt="Extension Dashboard Logo" />
+      <img
+        className="img logo-animate"
+        src={logo}
+        alt="Extension Dashboard Logo"
+      />
       <button
         onClick={handleColorButton}
         className="theme-toggle"
-        aria-label={colorChanges ? "Switch to dark theme" : "Switch to light theme"}
+        aria-label={
+          colorChanges ? "Switch to dark theme" : "Switch to light theme"
+        }
       >
         <img
           className={toggleAnimate ? "toggle-animate" : ""}
@@ -127,101 +140,6 @@ function Header() {
           alt=""
         />
       </button>
-    </div>
-  );
-}
-
-function Main() {
-  const [currentFilter, setCurrentFilter] = useState("all");
-  const [extensions, setExtensions] = useState(data);
-
-  const filteredData = extensions.filter((item) => {
-    if (currentFilter === "all") return true;
-    return currentFilter === "active" ? item.isActive : !item.isActive;
-  });
-
-  return (
-    <div>
-      <Hero setCurrentFilter={setCurrentFilter} currentFilter={currentFilter} />
-      <Tabs data={filteredData} setExtensions={setExtensions} />
-    </div>
-  );
-}
-
-function Hero({ currentFilter, setCurrentFilter }) {
-  return (
-    <div className="hero">
-      <div className="title-animate">
-        <h1>Extensions List</h1>
-      </div>
-      <nav aria-label="Filter options">
-        <div className="hero-btn">
-          <button
-            className={`button-animate ${currentFilter === "all" ? "active" : ""}`}
-            style={{ animationDelay: "0s" }}
-            onClick={() => setCurrentFilter("all")}
-            aria-pressed={currentFilter === "all"}
-          >
-            All
-          </button>
-          <button
-            className={`button-animate ${currentFilter === "active" ? "active" : ""}`}
-            style={{ animationDelay: "0.1s" }}
-            onClick={() => setCurrentFilter("active")}
-            aria-pressed={currentFilter === "active"}
-          >
-            Active
-          </button>
-          <button
-            className={`button-animate ${currentFilter === "inactive" ? "active" : ""}`}
-            style={{ animationDelay: "0.2s" }}
-            onClick={() => setCurrentFilter("inactive")}
-            aria-pressed={currentFilter === "inactive"}
-          >
-            Inactive
-          </button>
-        </div>
-      </nav>
-    </div>
-  );
-}
-
-function Tabs({ data, setExtensions }) {
-  const toggleExtension = (name) => {
-    setExtensions((prev) =>
-      prev.map((ext) => (ext.name === name ? { ...ext, isActive: !ext.isActive } : ext))
-    );
-  };
-
-  const removeExtension = (name) => {
-    setExtensions((prev) => prev.filter((ext) => ext.name !== name));
-  };
-
-  return (
-    <div className="grid-col-3">
-      {data.map((item, index) => (
-        <div className="grid-card card-animate" key={item.name} style={{ animationDelay: `${index * 0.1}s` }}>
-          <div className="grid-card-header">
-            <img src={item.logo} width={36} alt={`${item.name} logo`} />
-            <div className="grid-card-header__cont">
-              <h4>{item.name}</h4>
-              <span>{item.description}</span>
-            </div>
-          </div>
-          <div className="grid-card-button">
-            <button onClick={() => removeExtension(item.name)}>Remove</button>
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={item.isActive}
-                onChange={() => toggleExtension(item.name)}
-                aria-label={`Toggle ${item.name} extension`}
-              />
-              <span className="slider"></span>
-            </label>
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
